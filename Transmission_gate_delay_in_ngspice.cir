@@ -1,0 +1,39 @@
+*tgate
+.option scale=90n
+
+.model NMOS NMOS version = 3.3 level = 49 =3 l=2
++  ad=25 pd=22 as=22 ps=20 vth0= 0.7
+.model PMOS PMOS version 3.3 level = 49 w=6 l=2
++  ad=42 pd=26 as=36 ps=24 vth0 =-0.7
+
+ 
+ 
+MNT1 output clock input ground NMOS w=3 l=1
+MPT1 output clockbar input vdd PMOS w=6 l=1
+
+Cload Output ground 4f
+
+Vsupply vdd 0 3.3
+V_gnd    ground 0 0
+
+V_input input 0 pulse(0 3.3 0  1ps  1ps 1n      2n)
+
+Vclock clock ground pulse (0 3.3 0  1ps  1ps 8n       16n)
+Vclockbar clockbar ground pulse (0 3.3  8n  1ps  1ps 8n 16n)
+
+.op
+.tran  0.01ns 8ns
+.measure tran TpLH trig v(input) val = 1.65 rise = 2 targ v(output) val =1.65 rise =2
+.measure tran TpHL trig v(input) val = 1.65 fall = 2 targ v(output) val =1.65 fall =2
+
+.control
+set color0 = white
+set color1 = black
+run
+plot V(input)  v(output) V(clock)
+*plot V(clockbar) V(clock)
+*plot V(clock) v(output)
+.endc
+.end
+
+

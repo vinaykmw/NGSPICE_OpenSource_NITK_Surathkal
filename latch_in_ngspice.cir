@@ -1,0 +1,57 @@
+* cascade of transmissoin gate 
+
+.option scale=90n
+
+.model NMOS_T NMOS version = 3.3 level = 49 =3 l=2
++  ad=25 pd=22 as=22 ps=20 vth0= 0.7
+.model PMOS_T PMOS version 3.3 level = 49 w=6 l=2
++  ad=42 pd=26 as=36 ps=24 vth0 =-0.7
+
+
+.model NMOS NMOS version = 3.3 level = 49 w=3 l=2
++  ad=19 pd=18 as=19 ps=18 vth0= 0.7
+.model PMOS PMOS version 3.3 level = 49 w=6 l=2
++  ad=30 pd=22 as=30 ps=22 vth0 =-0.7
+
+
+*inv1 
+MN1 output2 output1 ground ground NMOS w=2 l=2
+MP1 output2 output1 vdd vdd PMOS w=4 l=2
+
+*inv1 
+MN2 output3 output2 ground ground NMOS w=2 l=2
+MP2 output3 output2 vdd vdd PMOS w=4 l=2
+
+ 
+*tg1 
+MNT1 output1 clock D ground NMOS_T w=3 l=1
+MPT1 output1 clockbar D vdd PMOS_T w=6 l=1
+
+*tg2 
+MNT2 output1 clockbar output3 ground NMOS_T w=3 l=1
+MPT2 output1 clock output3 vdd PMOS_T w=6 l=1
+
+
+V_supply vdd ground 3.3
+V_ground ground 0 0
+V_input D ground pulse(0 3.3 0  1ps  1ps 1n  2n)
+Vclock clock ground pulse (0 3.3 0  1ps  1ps 8n       16n)
+Vclockbar clockbar ground pulse (0 3.3  8n  1ps  1ps 8n 16n)
+
+.op
+.control
+run
+tran 0.01ns 4ns
+meas tran tplh trig V(d) val=1.65 fall =1 targ v(output2) val=1.65 rise =1
+ 
+set color0 = white
+set color1 = black
+plot V(D)  V(clock)
+plot v(output2) 
+*plot 
+
+.endc
+.end
+
+
+
