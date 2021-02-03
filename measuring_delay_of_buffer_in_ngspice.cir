@@ -1,0 +1,35 @@
+* Assingment 2 Sol 1 a , 1ps rise
+.include ntyp.txt
+.include ptyp.txt
+
+VDD supply_rail  Vss  3.3
+Vground Vss 0 0
+C_Load Vo2 Vss 100f
+Vi Input_1 Vss  pulse(0 3.3 0 100p 100p 5n,10n)
+
+*pulse(<vmin> <vmax> <delay> <rise time> <fall time> <pulsewidth> <period>)
+
+* inverter stage 1
+MP1 Vo1 Input_1 supply_rail supply_rail PMOS w =3.6u l =0.8u
+MN1 Vo1 Input_1 Vss Vss NMOS  w=1.2u l = 0.8u
+
+MP2 Vo2 Vo1 supply_rail supply_rail PMOS w =3.6u l =0.8u
+MN2 Vo2 Vo1 Vss Vss NMOS  w=1.2u l = 0.8u
+
+
+
+.tran  0.01ns 15ns 
+.measure tran tplh_1 TRIG v(Input_1) VAL=1.65 Fall=1 TARG v(Vo1) VAL=1.65 RISE=1
+.measure tran tphl_1 TRIG v(Input_1) VAL=1.65 RISE=2 TARG v(Vo1) VAL=1.65 FALL=2
+.measure tran tplh_2 TRIG v(Vo1) VAL=1.65 FALL=1 TARG v(Vo2) VAL=1.65 RISE=1
+.measure tran tphl_2 TRIG v(Vo1) VAL=1.65 RISE=1 TARG v(Vo2) VAL=1.65 FALL=1
+
+.control
+set filetype=ascii
+run
+plot  Input_1 Vo1 Vo2
+*plot Input_1 Vo1
+*write output_Q1.csv Input_1 Vo1 Vo2
+.endc
+.end
+

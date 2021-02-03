@@ -1,0 +1,42 @@
+* inverter with parameter sweep
+*Vinay Kushwaha 
+*M.tech Research VLSI 
+.include ntyp.txt
+.include ptyp.txt
+.param Wp = 4.56u
+
+
+*netlist of supply and input
+V_Supply supply 0 3.3 
+V_input input 0 3.3
+V_ground ground 0 0
+
+
+*netlist of inverter 
+
+*MOS drain gate source bulk
+
+mp1 output input supply supply PMOS w = Wp l=0.8u pd=2u ps=2u
+mn1 output input ground ground NMOS w =1.2u l =0.8u pd=2u ps=2u
+
+
+.control
+run
+set color0 = white
+set color 1 =black
+dc V_input 0 3.3 1m
+plot dc1.V(output) vs input
+meas dc V_oh max V(output)
+meas dc V_ol min V(output)
+let slope = deriv(V(output))
+meas dc V_il  find v(input) when slope = -1 fall = 1
+meas dc v_ih  find v(input) when slope = -1 rise = 1
+let NM_h = (V_oh - V_ih)
+let NM_l = (V_il - V_ol)
+print NM_h,NM_l
+
+ 
+
+.endc
+.end
+ 

@@ -1,0 +1,34 @@
+* Assingment 1 MOS Characteristics 
+* plot ID vs VGS with varying VGS
+*Library import
+.include tsmc180.txt
+
+*nelist start 
+VD D D2 .1V
+VG G 0 .5V
+VB B 0  0V
+VS S 0 0V
+*name drain gate source body modelname as in model file
+M1 D G S B  CMOSN w = 2u l = .18u
+ViD D2 0 dc 0V 
+
+*netlist end
+
+*Simulation Start
+*
+*.dc VG 0 3 .01 
+.dc VD 0 20 .01 VG 0 10 .3
+*VB -1.3 .5 .3
+*VD .1 1.8 .3
+
+.control
+run
+print @M1[vth]
+plot -ViD#branch vs V(D) 
+* Store Data by using 
+* wrdata plot.dat ViD#branch vs V(G)
+
+.endc
+
+.end
+

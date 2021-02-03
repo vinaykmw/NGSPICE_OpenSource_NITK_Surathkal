@@ -1,0 +1,8 @@
+*MOS 180nm
+.option scale = 90n
+.model NMOS180 NMOS Level = 49 Version = 3.1 w=3 l=2
++  ad=19 pd=18 as=19 ps=18 vth0 = 0.3
+.model PMOS180 PMOS Level = 49 version =3.1 w=3 l=2
++  ad=19 pd=18 as=19 ps=18 vth0 =-0.3
+
+

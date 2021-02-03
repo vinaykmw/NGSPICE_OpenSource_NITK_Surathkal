@@ -1,0 +1,40 @@
+.MODEL PMOS PMOS LEVEL   = 49                 
++TNOM    = 27             TOX     = 1.75E-8        XJ      = 3E-7               
++NCH     = 1.7E17         NSUB    = 4E16           VTH0    = -1.00  
++K1      = 0.563991       K2      = 0              K3      = 16.3317811   
++K3B     = -2.9202228     W0      = 1.23464E-6     NLX     = 9.69545E-8         
++DVT0W   = 0              DVT1W   = 0              DVT2W   = -0.032             
++DVT0    = 3.5648008      DVT1    = 0.3898843      DVT2    = -0.0284121 
++VBM     = -10            U0      = 235.7724356    UA      = 2.964616E-9        
++UB      = 1.419129E-18   UC      = -7.00385E-11   VSAT    = 1.1E5
++A0      = 0.4590784      AGS     = 0              B0      = 0                  
++B1      = 1.407805E-9    KETA    = -0.047         A1      = 0                  
++A2      = 1              RDSW    = 3E3            PRWG    = 2.024978E-3        
++RSH     = 94             PRWB    = 7.428781E-5    WR      = 1    
++WINT    = 10.669321E-8   LINT    = 1.9089522E-8   DWG     = -1.478082E-8 
++DWB     = 1.561823E-8    ALPHA0  = 0              BETA0   = 30     
++VOFF    = -0.126	  NFACTOR = 0.7324039      CIT     = 0  
++CDSC    = 0              CDSCD   = 7.69E-4        CDSCB   = 8.2E-4  
++ETA0    = 9.999059E-4    ETAB    = -1.999936E-4   DSUB    = 0.998946           
++PCLM    = 2.6025265      PDIBLC1 = 1              PDIBLC2 = 2.853174E-4        
++PDIBLCB = 0              DROUT   = 0.3837047      PSCBE1  = 4.249266E8         
++PSCBE2  = 5E-5           PVAG    = 3.8222424      DELTA   = 0.01               
++MOBMOD  = 1              PRT     = 216.4347715    UTE     = -1.2989809         
++KT1     = -0.4521998     
++KT1L    = -2.091783E-8   KT2     = -0.040013          
++UA1     = 3.100822E-9    UB1     = -1E-17         UC1     = -8.35439E-11       
++AT      = 3.289E4        NQSMOD  = 0              WL      = 0                  
++WLN     = 1              WW      = 0              WWN     = 1                  
++WWL     = -2.33876E-20   LL      = 0              LLN     = 1                  
++LW      = 0              LWN     = 1              LWL     = 0                  
++CAPMOD  = 2              CGDO    = 1.0E-10        CGSO    = 1.0E-10           
++CGBO    = 3.35E-10       CJ      = 6.0E-4         PB      = 0.9               
++MJ      = 0.51           CJSW    = 3.6E-10        MJSW    = 0.35
++AF      = 1              KF      = 5.0E-30        
+* leakage
++DIOLEV  = 2		  JS      = 1.4E-7	  JSW = 9E-14 
++LIS     = 3              XTI = 0.5		  N = 1	
+* other switch
++XPART   = 0            ALEV    = 3            RLEV    = 4
++DCAPLEV = 0            ELM     = 5
+*

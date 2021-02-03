@@ -1,0 +1,41 @@
+* Assingment 2 Sol Q2b All inverter of scaled size F =4 N =4
+.include ntyp.txt
+.include ptyp.txt
+
+VDD supply_rail  Vss  3.3
+Vground Vss 0 0
+C_Load Vo4 Vss 1pf
+Vi Input_1 Vss  pulse(0 3.3 0 500p 500p 5n,10n)
+
+*pulse(<vmin> <vmax> <delay> <rise time> <fall time> <pulsewidth> <period>)
+
+* inverter stage 1
+MP1 Vo1 Input_1 supply_rail supply_rail PMOS w =3.6u l =0.8u
+MN1 Vo1 Input_1 Vss Vss NMOS  w=1.2u l = 0.8u
+
+* inverter stage 2
+MP2 Vo2 Vo1 supply_rail supply_rail PMOS w =14.4u l =0.8u
+MN2 Vo2 Vo1 Vss Vss NMOS  w=4.8u l = 0.8u
+
+* inverter stage 3
+MP3 Vo3 Vo2 supply_rail supply_rail PMOS w =47.6u l =0.8u
+MN3 Vo3 Vo2 Vss Vss NMOS  w=19.2u l = 0.8u
+
+* inverter stage 4
+MP4 Vo4 Vo3 supply_rail supply_rail PMOS w =190.4u l =0.8u
+MN4 Vo4 Vo3 Vss Vss NMOS  w= 76.8u l = 0.8u
+
+.tran  0.01ns 15ns 
+.measure tran tplh TRIG v(Input_1) VAL=1.65 RISE=1 TARG v(Vo4) VAL=1.65 RISE=1
+.measure tran tphl TRIG v(Input_1) VAL=1.65 FAll=1 TARG v(Vo4) VAL=1.65 FAll=1
+
+.control
+set filetype=ascii
+run
+plot Input_1  Vo4
+*plot Input_1 Vo1 Vo2 Vo3
+*plot Input_1 Vo1
+*write output_Q1.csv Input_1 Vo1 Vo2
+.endc
+.end
+

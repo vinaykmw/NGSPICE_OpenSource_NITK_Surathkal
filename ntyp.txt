@@ -1,0 +1,56 @@
+*
+*******************************************************************************
+* C07MA & C07MD N TYPICAL MODEL
+*
+* RELEASE 3.2 (FOR MORE INFORMATION, READ THE MODELS.INFO FILE)
+* 1, Nature NDMOS model added,
+*    Subcircuit NNDMOS4 defining the NNDMOS model
+* 2, polydiode model added, model name is DPL.
+*
+* Update of leakage models by ZN, 29/09/99
+*******************************************************************************
+*                                          
+.MODEL NMOS NMOS LEVEL   = 49
++TNOM    = 27             TOX     = 1.75E-8        XJ      = 2.5E-7             
++NCH     = 1.7E17         NSUB    = 4E16           VTH0    = 0.76               
++K1      = 0.8219166      K2      = -8.54312E-3    K3      = 11.1089581         
++K3B     = -1.9786631     W0      = 1E-6           NLX     = 3.751355E-8        
++DVT0W   = 0              DVT1W   = 0              DVT2W   = -0.032             
++DVT0    = 5.2254747      DVT1    = 0.590721       DVT2    = -0.05              
++VBM     = -5             U0      = 635.6142994    UA      = 1.983902E-9        
++UB      = 1E-21          UC      = 4.667652E-11   VSAT    = 9.5E4              
++A0      = 0.9331753      AGS     = 0.1339124      B0      = 0                  
++B1      = 0              KETA    = -2.746786E-5   A1      = 0                  
++A2      = 1              RDSW    = 1.573286E3     PRWG    = 6.719929E-6        
++PRWB    = -1E-3          WR      = 1              WINT    = 6.065442E-8        
++LINT    = 2.87042E-8     DWG     = -1.268839E-8   DWB     = 1.654199E-8        
++VOFF    = -0.15          NFACTOR = 0.6887273      CIT     = 0                  
++CDSC    = 0          CDSCD   = 0              CDSCB   = 0               
++ETA0    = 0.08           ETAB    = -0.07          DSUB    = 0.56               
++PCLM    = 1.0175962      PDIBLC1 = 0.032818       PDIBLC2 = 2.506552E-3        
++PDIBLCB = -1E-6          DROUT   = 0.6067512      PSCBE1  = 3.356583E8         
++PSCBE2  = 5E-5           PVAG    = 0.0168906      DELTA   = 0.01               
++ALPHA0  = 5E-7           BETA0   = 26             RSH     = 65                 
++MOBMOD  = 1              PRT     = 159.2464225    UTE     = -1.9522848         
++KT1     = -0.4126334     KT1L    = 7.244799E-9    KT2     = 2.671323E-3        
++UA1     = 8.353648E-11   UB1     = -2.12098E-19   UC1     = -5.6E-11           
++AT      = 3.3E4          NQSMOD  = 0              WL      = 0                  
++WLN     = 1              WW      = 0              WWN     = 1                  
++WWL     = -5.30182E-20   LL      = 0              LLN     = 1                  
++LW      = 0              LWN     = 1              LWL     = 0                  
++AF      = 1              KF      = 3E-28          CAPMOD  = 2                  
++CGDO    = 4E-10          CGSO    = 4E-10          CGBO    = 3.35E-10           
++CJ      = 5E-4           PB      = 0.73           MJ      = 0.35               
++CJSW    = 2.8E-10        PBSW    = 0.8            MJSW    = 0.21
+* leakage
++DIOLEV  = 2		  JS      = 1.3E-07	  JSW = 7E-14
+* leakage temperature
++LIS=3			  XTI = 2		   N = 1 	
+* Area computation, then junc cap and junc leakage computation
++ALEV = 3		  DCAPLEV = 0         
+* Access resistance equations
++ RLEV = 4
+* channel charge partition
++XPART   = 0            
+* Elmore constant
++ELM     = 5

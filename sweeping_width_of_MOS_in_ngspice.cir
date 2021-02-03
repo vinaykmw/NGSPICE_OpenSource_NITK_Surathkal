@@ -1,0 +1,50 @@
+* inverter with parameter sweep
+
+.include ntyp.txt
+.include ptyp.txt
+.param Wp = 1.2u
+
+
+*netlist of supply and input
+V_Supply supply 0 3.3 
+V_input input 0 3.3
+V_ground ground 0 0
+
+
+*netlist of inverter 
+
+*MOS drain gate source bulk
+
+mp1 output input supply supply PMOS w = Wp l=0.8u pd=2u ps=2u
+mn1 output input ground ground NMOS w =1.2u l =0.8u pd=2u ps=2u
+
+* .dc srcnam vstart vstop vincr [src2 start2 stop2 incr2]
+*.MEASURE {DC|AC|TRAN|SP} result FIND out_variable + WHEN out_variable2=out_variable3 <TD=td> + <CROSS=# | CROSS=LAST> + <RISE=#|RISE=LAST> <FALL=#|FALL=LAST>
+
+*.measure DC IntersecionPoint Find v(input) When v(output) = v(input) 
+*.DC V_input 0 3.3 0.1
+
+.control
+set color0 = white
+set color 1 =black
+let beta = 3.8
+let pmos_width = 1.2u
+alter mp1 w = pmos_width
+dowhile beta < 5
+	
+	let pmos_width_c = 1.2u
+	let pmos_width = pmos_width_c*beta
+	alter @mp1[w] = pmos_width
+	print beta
+	print pmos_width
+	dc V_input 0 3.3 1m
+	let beta = beta + 0.1
+	end
+run
+
+plot dc1.V(output) dc2.V(output)  dc3.V(output) dc4.V(output) dc5.V(output) dc6.V(output) dc7.V(output) dc8.V(output) dc9.V(output) dc10.V(output)   1.65 input
+
+
+.endc
+.end
+ 

@@ -1,0 +1,27 @@
+* testing mos 
+.include MOS180nm.txt
+
+MP1 out input Vdd Vdd PMOS180
+MN1 out input ground ground NMOS180
+*xInverter1 out2 input vdd ground inverter
+V_sup vdd 0 1.8
+V_g ground 0 0
+C0 input  Gnd 4.92fF
+Vinput input 0 pulse (0 1.8 0 1n 1n 10n 20n )
+
+.control
+run
+DC Vinput 0 1.8 1m
+plot V(out) vs V(input) V(input) 0.9
+
+print @MP1[w]
+print @MP1[l]
+print @MP1[vth]
+print @MN1[vth]
+*tran 0.1n 40n
+*plot  v(input) V(out) 
+*V(out2)
+
+
+.endc
+.end
